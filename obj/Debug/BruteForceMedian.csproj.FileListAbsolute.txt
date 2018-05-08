@@ -1,0 +1,7 @@
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\bin\Debug\BruteForceMedian.exe.config
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\bin\Debug\BruteForceMedian.exe
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\bin\Debug\BruteForceMedian.pdb
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.csprojResolveAssemblyReference.cache
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.csproj.CoreCompileInputs.cache
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.exe
+C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.pdb
