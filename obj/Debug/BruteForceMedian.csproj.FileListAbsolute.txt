@@ -5,3 +5,6 @@ C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteFo
 C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.csproj.CoreCompileInputs.cache
 C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.exe
 C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteForceMedian.pdb
+C:\Users\Ehryus\Documents\GitHub\CAB301\obj\Debug\BruteForceMedian.csprojResolveAssemblyReference.cache
+C:\Users\Ehryus\Documents\GitHub\CAB301\obj\Debug\BruteForceMedian.exe
+C:\Users\Ehryus\Documents\GitHub\CAB301\obj\Debug\BruteForceMedian.pdb

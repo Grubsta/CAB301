@@ -8,12 +8,7 @@ namespace BruteForceMedian
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            int[] array = new int[] {-5, -1, 0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13};
-            int median = Median(array);
-            Console.WriteLine(median);
-        }
+
         /// <summary>
         /// Returns the median value in a given array A of n numbers. 
         /// This is the kth element, where k = n/2, if the array was sorted.
@@ -95,5 +90,44 @@ namespace BruteForceMedian
             array[b] = temp;
         }
 
+        static void Main(string[] args)
+        {
+
+
+
+            int testCases = 100;
+            int[] array = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000, 100000 };
+            int median = Median(array);
+            int tests = array.Length;
+            double[,] time = new double[tests, testCases];
+
+            for (int a = 0; a < testCases; a++)
+            {
+                Console.WriteLine("Test Case: " + a);
+                foreach (int number in array)
+                {
+                    int[] subarray = new int[number + 1];
+                    for (int i = number / 2; i >= -(number / 2); i--)
+                    {
+                        array[i + (number / 2)] = i;
+                    }
+                    time[Array.IndexOf(array, number), a] = Median(array);
+                }
+            }
+
+
+            for (int a = 0; a < tests; a++)
+            {
+                double totalTime = 0;
+                for (int i = 0; i < testCases; i++)
+                {
+                    totalTime += time[a, i];
+                }
+                totalTime /= testCases;
+                Console.WriteLine(a + "    :    " + totalTime);
+            }
+
+        }
     }
 }
+
