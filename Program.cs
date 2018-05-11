@@ -103,10 +103,12 @@ namespace BruteForceMedian
                 foreach (int number in array)
                 {
                     int[] subarray = new int[number + 1];
+                    // Creates an array from n/2 to -n/2  
                     for (int i = number / 2; i >= -(number / 2); i--)
                     {
                         subarray[i + (number / 2)] = i;
                     }
+                    // Adds the time performance of each alogrithm to an array[Index, test case] = time in milliseconds
                     BFtime[Array.IndexOf(array, number), a] = BruteForceMedian(array);
                     Mtime[Array.IndexOf(array, number), a] = Median(array);
                 }
@@ -117,6 +119,7 @@ namespace BruteForceMedian
             {
                 double BFtotalTime = 0;
                 double MtotalTime = 0;
+                // Averages total time performed by each algorithm
                 for (int i = 0; i < testCases; i++)
                 {
                     BFtotalTime += BFtime[a, i];
@@ -126,7 +129,6 @@ namespace BruteForceMedian
                 MtotalTime /= testCases;
                 Console.WriteLine(a + "    :    " + BFtotalTime);
             }
-
         }
     }
 }
