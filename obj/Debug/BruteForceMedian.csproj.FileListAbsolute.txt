@@ -8,3 +8,10 @@ C:\Users\Chorey\source\repos\BruteForceMedian\BruteForceMedian\obj\Debug\BruteFo
 C:\Users\Ehryus\Documents\GitHub\CAB301\obj\Debug\BruteForceMedian.csprojResolveAssemblyReference.cache
 C:\Users\Ehryus\Documents\GitHub\CAB301\obj\Debug\BruteForceMedian.exe
 C:\Users\Ehryus\Documents\GitHub\CAB301\obj\Debug\BruteForceMedian.pdb
+D:\GitHub\301\CAB301\bin\Debug\BruteForceMedian.exe.config
+D:\GitHub\301\CAB301\bin\Debug\BruteForceMedian.exe
+D:\GitHub\301\CAB301\bin\Debug\BruteForceMedian.pdb
+D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.csprojResolveAssemblyReference.cache
+D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.csproj.CoreCompileInputs.cache
+D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.exe
+D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.pdb

@@ -8,7 +8,6 @@ namespace BruteForceMedian
 {
     class Program
     {
-
         /// <summary>
         /// Returns the median value in a given array A of n numbers. 
         /// This is the kth element, where k = n/2, if the array was sorted.
@@ -92,14 +91,11 @@ namespace BruteForceMedian
 
         static void Main(string[] args)
         {
-
-
-
             int testCases = 100;
             int[] array = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000, 100000 };
-            int median = Median(array);
             int tests = array.Length;
-            double[,] time = new double[tests, testCases];
+            double[,] BFtime = new double[tests, testCases];
+            double[,] Mtime = new double[tests, testCases];
 
             for (int a = 0; a < testCases; a++)
             {
@@ -109,22 +105,26 @@ namespace BruteForceMedian
                     int[] subarray = new int[number + 1];
                     for (int i = number / 2; i >= -(number / 2); i--)
                     {
-                        array[i + (number / 2)] = i;
+                        subarray[i + (number / 2)] = i;
                     }
-                    time[Array.IndexOf(array, number), a] = Median(array);
+                    BFtime[Array.IndexOf(array, number), a] = BruteForceMedian(array);
+                    Mtime[Array.IndexOf(array, number), a] = Median(array);
                 }
             }
 
-
+            
             for (int a = 0; a < tests; a++)
             {
-                double totalTime = 0;
+                double BFtotalTime = 0;
+                double MtotalTime = 0;
                 for (int i = 0; i < testCases; i++)
                 {
-                    totalTime += time[a, i];
+                    BFtotalTime += BFtime[a, i];
+                    MtotalTime += Mtime[a, i];
                 }
-                totalTime /= testCases;
-                Console.WriteLine(a + "    :    " + totalTime);
+                BFtotalTime /= testCases;
+                MtotalTime /= testCases;
+                Console.WriteLine(a + "    :    " + BFtotalTime);
             }
 
         }
