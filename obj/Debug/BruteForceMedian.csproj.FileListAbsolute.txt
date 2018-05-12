@@ -15,3 +15,6 @@ D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.csprojResolveAssemblyReference.c
 D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.csproj.CoreCompileInputs.cache
 D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.exe
 D:\GitHub\301\CAB301\obj\Debug\BruteForceMedian.pdb
+C:\Users\Ehryus\Documents\GitHub\CAB301\bin\Debug\BruteForceMedian.exe.config
+C:\Users\Ehryus\Documents\GitHub\CAB301\bin\Debug\BruteForceMedian.exe
+C:\Users\Ehryus\Documents\GitHub\CAB301\bin\Debug\BruteForceMedian.pdb

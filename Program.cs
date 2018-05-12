@@ -12,6 +12,7 @@ namespace BruteForceMedian
         /// Returns the median value in a given array A of n numbers. 
         /// This is the kth element, where k = n/2, if the array was sorted.
         /// </summary>
+    
         static int BruteForceMedian(int[] array)
         {
             int operations = 0;
@@ -91,44 +92,74 @@ namespace BruteForceMedian
 
         static void Main(string[] args)
         {
-            int testCases = 100;
-            int[] array = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000, 100000 };
-            int tests = array.Length;
-            double[,] BFtime = new double[tests, testCases];
-            double[,] Mtime = new double[tests, testCases];
+            int testCases = 2;
 
-            for (int a = 0; a < testCases; a++)
+            // Array for the sizes of array to test
+            int[] sizeArray = new int[10] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000};
+
+            // List containing values
+            List<int> testValues =  new List<int>();
+
+            // number of tests
+            int testCount = sizeArray.Length;
+            double[,] BFtime = new double[testCount, testCases];
+            double[,] Mtime = new double[testCount, testCases];
+
+            Console.WriteLine("[status] Commencing Testing...");
+
+            //TEST CASES START AT 1 NOT 0 SO THATS WHY THE FOR LOOP START AT 1
+            for (int a = 1; a <= testCases; a++)
             {
-                Console.WriteLine("Test Case: " + a);
-                foreach (int number in array)
+                Console.WriteLine("[status] Test number " + a + "...");
+
+                //Console.WriteLine("Test Case: " + a);
+                Random rand = new Random();
+                for(int index = 0; index < testCount; index++)
                 {
-                    int[] subarray = new int[number + 1];
-                    // Creates an array from n/2 to -n/2  
-                    for (int i = number / 2; i >= -(number / 2); i--)
+                    
+                    int size = sizeArray[index];
+                    Console.WriteLine("[status] Testing array of size " + size + "...");
+                    //int[] subarray = new int[number + 1];
+                    //// Creates an array from n/2 to -n/2  
+                    //for (int i = number / 2; i >= -(number / 2); i--)
+                    //{
+                    //    subarray[i + (number / 2)] = i;
+                    //}
+                    for (int i = 0; i < size; i++)
                     {
-                        subarray[i + (number / 2)] = i;
+                        testValues.Add(rand.Next(1,size + 1));
                     }
+     
+                    int[] values = testValues.ToArray();
+
+
+                    testValues.Clear();
                     // Adds the time performance of each alogrithm to an array[Index, test case] = time in milliseconds
-                    BFtime[Array.IndexOf(array, number), a] = BruteForceMedian(array);
-                    Mtime[Array.IndexOf(array, number), a] = Median(array);
+                    BruteForceMedian(values);
+                    Median(values);
                 }
             }
 
-            
-            for (int a = 0; a < tests; a++)
-            {
-                double BFtotalTime = 0;
-                double MtotalTime = 0;
-                // Averages total time performed by each algorithm
-                for (int i = 0; i < testCases; i++)
-                {
-                    BFtotalTime += BFtime[a, i];
-                    MtotalTime += Mtime[a, i];
-                }
-                BFtotalTime /= testCases;
-                MtotalTime /= testCases;
-                Console.WriteLine(a + "    :    " + BFtotalTime);
-            }
+            Console.WriteLine("DONE!");
+
+
+            //for (int a = 0; a < tests; a++)
+            //{
+            //    double BFtotalTime = 0;
+            //    double MtotalTime = 0;
+            //    // Averages total time performed by each algorithm
+            //    for (int i = 0; i < testCases; i++)
+            //    {
+            //        BFtotalTime += BFtime[a, i];
+            //        MtotalTime += Mtime[a, i];
+            //    }
+            //    BFtotalTime /= testCases;
+            //    MtotalTime /= testCases;
+
+            //    Console.WriteLine(a + "    :    " + BFtotalTime);
+            //}
+
+            Console.ReadKey();
         }
     }
 }
