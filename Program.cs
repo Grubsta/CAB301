@@ -17,7 +17,7 @@ namespace BruteForceMedian
         {
             int operations = 0;
             int k = (int)array.Length / 2;
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+            
             for (int a = 0; a <= array.Length - 1; a++)
             {
                 int numSmaller = 0;
@@ -33,8 +33,8 @@ namespace BruteForceMedian
                 }
                 if (numSmaller < k && k <= (numSmaller + numEqual)) return array[a];
             }
-            watch.Stop();
-            return 0; // Haven't implemented operations.
+            
+            return 0; 
         }
         /// <summary>
         /// Returns the median value in a given array A of n numbers.
@@ -56,7 +56,7 @@ namespace BruteForceMedian
             if (pos == m) return array[pos];
             if (pos > m) return Select(array, l, m, pos - 1);
             if (pos < m) return Select(array, pos + 1, m, h);
-            return 0; // Haven't implemented operations.
+            return 0; 
         }
         /// <summary>
         /// Partitions array slic A[l..h] by moving element A[l} to the position
@@ -95,70 +95,73 @@ namespace BruteForceMedian
             int testCases = 2;
 
             // Array for the sizes of array to test
-            int[] sizeArray = new int[10] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000};
+            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000};
 
             // List containing values
             List<int> testValues =  new List<int>();
 
             // number of tests
             int testCount = sizeArray.Length;
-            double[,] BFtime = new double[testCount, testCases];
-            double[,] Mtime = new double[testCount, testCases];
+            double[,] BFtime = new double[testCount, testCases+1];
+            double[,] Mtime = new double[testCount, testCases+1];
 
             Console.WriteLine("[status] Commencing Testing...");
 
-            //TEST CASES START AT 1 NOT 0 SO THATS WHY THE FOR LOOP START AT 1
-            for (int a = 1; a <= testCases; a++)
+            // Runs for the amount of tests
+            for (int a = 0; a < testCases; a++)
             {
-                Console.WriteLine("[status] Test number " + a + "...");
+                Console.WriteLine("[status] Test number " + (a + 1) + "...");
 
-                //Console.WriteLine("Test Case: " + a);
                 Random rand = new Random();
+                // Runs for ever number in Array
                 for(int index = 0; index < testCount; index++)
                 {
                     
                     int size = sizeArray[index];
                     Console.WriteLine("[status] Testing array of size " + size + "...");
-                    //int[] subarray = new int[number + 1];
-                    //// Creates an array from n/2 to -n/2  
-                    //for (int i = number / 2; i >= -(number / 2); i--)
-                    //{
-                    //    subarray[i + (number / 2)] = i;
-                    //}
                     for (int i = 0; i < size; i++)
                     {
                         testValues.Add(rand.Next(1,size + 1));
                     }
-     
                     int[] values = testValues.ToArray();
 
-
                     testValues.Clear();
+
                     // Adds the time performance of each alogrithm to an array[Index, test case] = time in milliseconds
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
                     BruteForceMedian(values);
+                    watch.Stop();
+
+                    BFtime[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
+
+                    watch.Reset();
+                    watch.Start();
                     Median(values);
+                    watch.Stop();
+
+                    Mtime[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
+
                 }
             }
+            /// <summary>
+            /// Iterates through the sizeArray averaging the time of each size and outputs it to the console.
+            /// </summary>
+            for (int a = 0; a < testCount; a++)
+            {
+                double BFtotalTime = 0;
+                double MtotalTime = 0;
+                
+                for (int i = 0; i < testCases; i++)
+                {
+                    BFtotalTime += BFtime[a, i];
+                    MtotalTime += Mtime[a, i];
 
-            Console.WriteLine("DONE!");
+                }
+                BFtotalTime /= testCases;
+                MtotalTime /= testCases;
 
-
-            //for (int a = 0; a < tests; a++)
-            //{
-            //    double BFtotalTime = 0;
-            //    double MtotalTime = 0;
-            //    // Averages total time performed by each algorithm
-            //    for (int i = 0; i < testCases; i++)
-            //    {
-            //        BFtotalTime += BFtime[a, i];
-            //        MtotalTime += Mtime[a, i];
-            //    }
-            //    BFtotalTime /= testCases;
-            //    MtotalTime /= testCases;
-
-            //    Console.WriteLine(a + "    :    " + BFtotalTime);
-            //}
-
+                Console.WriteLine("Average Time, set:  " + sizeArray[a] + "  Time(BF  :  M):  " + BFtotalTime + "  :  " + MtotalTime + " ms");
+            }
             Console.ReadKey();
         }
     }
