@@ -51,7 +51,6 @@ namespace BruteForceMedian
         /// </summary>
         static int Select(int[] array, int l, int m, int h)
         {
-            int operations = 0;
             int pos = Partition(array, l, h);
             if (pos == m) return array[pos];
             if (pos > m) return Select(array, l, m, pos - 1);
@@ -102,23 +101,22 @@ namespace BruteForceMedian
 
             // number of tests
             int testCount = sizeArray.Length;
-            double[,] BFtime = new double[testCount, testCases+1];
-            double[,] Mtime = new double[testCount, testCases+1];
+            double[,] BFtime = new double[testCount, testCases];
+            double[,] Mtime = new double[testCount, testCases];
+            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             Console.WriteLine("[status] Commencing Testing...");
-
             // Runs for the amount of tests
             for (int a = 0; a < testCases; a++)
             {
+                Console.WriteLine("[status]");
                 Console.WriteLine("[status] Test number " + (a + 1) + "...");
 
                 Random rand = new Random();
-                // Runs for ever number in Array
+                // Runs for every number in Array
                 for(int index = 0; index < testCount; index++)
-                {
-                    
+                {                    
                     int size = sizeArray[index];
-                    Console.WriteLine("[status] Testing array of size " + size + "...");
                     for (int i = 0; i < size; i++)
                     {
                         testValues.Add(rand.Next(1,size + 1));
@@ -128,9 +126,11 @@ namespace BruteForceMedian
                     testValues.Clear();
 
                     // Adds the time performance of each alogrithm to an array[Index, test case] = time in milliseconds
-                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    watch.Reset();
+                    watch.Start();
                     BruteForceMedian(values);
                     watch.Stop();
+                    Console.WriteLine("[status] Testing bfmed  of size " + size + "...");
 
                     BFtime[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
 
@@ -138,19 +138,24 @@ namespace BruteForceMedian
                     watch.Start();
                     Median(values);
                     watch.Stop();
+                    Console.WriteLine("[status] Testing median of size " + size + "...");
 
                     Mtime[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
 
                 }
+
+                Console.WriteLine("[status]");
             }
             /// <summary>
             /// Iterates through the sizeArray averaging the time of each size and outputs it to the console.
             /// </summary>
+            double BFtotalTime;
+            double MtotalTime;
             for (int a = 0; a < testCount; a++)
             {
-                double BFtotalTime = 0;
-                double MtotalTime = 0;
-                
+                BFtotalTime = 0;
+                MtotalTime = 0;
+
                 for (int i = 0; i < testCases; i++)
                 {
                     BFtotalTime += BFtime[a, i];
@@ -162,6 +167,7 @@ namespace BruteForceMedian
 
                 Console.WriteLine("Average Time, set:  " + sizeArray[a] + "  Time(BF  :  M):  " + BFtotalTime + "  :  " + MtotalTime + " ms");
             }
+
             Console.ReadKey();
         }
     }
