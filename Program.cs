@@ -91,7 +91,7 @@ namespace BruteForceMedian
 
         static void Main(string[] args)
         {
-            int testCases = 2;
+            int testCases = 15;
 
             // Array for the sizes of array to test
             int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 50000};
@@ -108,8 +108,7 @@ namespace BruteForceMedian
             Console.WriteLine("[status] Commencing Testing...");
             // Runs for the amount of tests
             for (int a = 0; a < testCases; a++)
-            {
-                Console.WriteLine("[status]");
+            {     
                 Console.WriteLine("[status] Test number " + (a + 1) + "...");
 
                 Random rand = new Random();
@@ -144,11 +143,12 @@ namespace BruteForceMedian
 
                 }
 
-                Console.WriteLine("[status]");
+                Console.WriteLine("[status] Finished Test");
             }
             /// <summary>
             /// Iterates through the sizeArray averaging the time of each size and outputs it to the console.
             /// </summary>
+            Console.WriteLine("[status] RESULTS");
             double BFtotalTime;
             double MtotalTime;
             for (int a = 0; a < testCount; a++)
@@ -173,3 +173,4 @@ namespace BruteForceMedian
     }
 }
 
+    
