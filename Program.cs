@@ -100,7 +100,7 @@ namespace BruteForceMedian
             int testCases = 1;
 
             // Array for the sizes of array to test
-            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000, 20000, 35000};
+            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000 };
 
             // List containing values
             List<int> testValues = new List<int>();
@@ -194,7 +194,7 @@ namespace BruteForceMedian
                     watch.Stop();
 
 
-                    Mops[Array.IndexOf(sizeArray, size), a] = Counter.counter;
+                    MopsOrdered[Array.IndexOf(sizeArray, size), a] = Counter.counter;
                     MtimeOrdered[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
                 }
             }
@@ -226,6 +226,7 @@ namespace BruteForceMedian
 
 
                     MopsTotal += Mops[a, i];
+                    MopsTotalOrdered += MopsOrdered[a, i];
                 }
                 BFtotalTime /= testCases;
                 MtotalTime /= testCases;
