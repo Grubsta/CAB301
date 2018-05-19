@@ -100,7 +100,7 @@ namespace BruteForceMedian
             int testCases = 1;
 
             // Array for the sizes of array to test
-            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000 };
+            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000, 20000, 35000};
 
             // List containing values
             List<int> testValues = new List<int>();
@@ -204,14 +204,7 @@ namespace BruteForceMedian
             Console.WriteLine("[status]");
             Console.WriteLine("[status] RESULTS");
             Console.WriteLine("[status]");
-            double BFtotalTime;
-            double MtotalTime;
-            double BFtotalTimeOrdered;
-            double MtotalTimeOrdered;
-            double BFopsTotal;
-            double MopsTotal;
-            double BFopsTotalOrdered;
-            double MopsTotalOrdered;
+            double BFtotalTime, MtotalTime, BFtotalTimeOrdered, MtotalTimeOrdered, BFopsTotal, MopsTotal, BFopsTotalOrdered, MopsTotalOrdered;
             for (int a = 0; a < testCount; a++)
             {
                 BFtotalTime = 0;
@@ -242,10 +235,10 @@ namespace BruteForceMedian
 
                 MopsTotal /= testCases;
 
-                Console.WriteLine("[result] Average Time for unorder set:\t" + sizeArray[a] + "\tTime(BF  :  M):  \t" + BFtotalTime + " ms : " + MtotalTime + " ms");
-                Console.WriteLine("[result] Average Ops for unorder set:\t" + sizeArray[a] + "\tOps (BF  :  M)  \t" + BFopsTotal + "ops : " + MopsTotal + "ops");
-                Console.WriteLine("[result] Average Time for order set:\t" + sizeArray[a] + "\tTime(BF  :  M):  \t" + BFtotalTimeOrdered + " ms : " + MtotalTimeOrdered + " ms");
-                Console.WriteLine("[result] Average Ops for order set:\t" + sizeArray[a] + "\tOps (BF  :  M)  \t" + BFopsTotalOrdered + "ops : " + MopsTotalOrdered + "ops");
+                Console.WriteLine("[result] Average Time for unorder set:\t" + sizeArray[a] + "\tTime(BF  :  M):\t" + BFtotalTime + " ms : " + MtotalTime + " ms");
+                Console.WriteLine("[result] Average Ops for unorder set:\t" + sizeArray[a] + "\tOps (BF  :  M):\t" + BFopsTotal + "ops : " + MopsTotal + "ops");
+                Console.WriteLine("[result] Average Time for order set:\t" + sizeArray[a] + "\tTime(BF  :  M):\t" + BFtotalTimeOrdered + " ms : " + MtotalTimeOrdered + " ms");
+                Console.WriteLine("[result] Average Ops for order set:\t" + sizeArray[a] + "\tOps (BF  :  M):\t" + BFopsTotalOrdered + "ops : " + MopsTotalOrdered + "ops");
             }
 
             Console.ReadKey();
