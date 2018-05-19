@@ -100,7 +100,7 @@ namespace BruteForceMedian
 
         static void Main(string[] args)
         {
-            int testCases = 1;
+            int testCases = 100;
 
             // Array for the sizes of array to test
             int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000 };
