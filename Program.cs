@@ -134,7 +134,7 @@ namespace BruteForceMedian
                     int size = sizeArray[index];
                     for (int i = 0; i < size; i++)
                     {
-                        testValues.Add(rand.Next(1, size + 1));
+                        testValues.Add(rand.Next(1, 10000000));
                     }
                     int[] values = testValues.ToArray();
 
