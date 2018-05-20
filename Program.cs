@@ -107,7 +107,7 @@ namespace BruteForceMedian
         {
             
             // Array for the sizes of array to test
-            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000 };
+            int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000, 30000, 50000};
 
             // List containing values
             List<int> testValues = new List<int>();
@@ -307,7 +307,7 @@ namespace BruteForceMedian
         }
         static void Main(string[] args)
         {
-            FunctionalTesting();
+            //FunctionalTesting();
             Testing(100);
         }
     }
