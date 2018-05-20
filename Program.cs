@@ -51,7 +51,11 @@ namespace BruteForceMedian
         {
             int length = array.Length;
             if (length == 1) return array[0];
-            else return Select(array, 0, (int)length / 2, length - 1);
+            else
+            {
+                int testVar = Select(array, 0, (int)length / 2, length - 1);
+                return testVar;
+            }
         }
         /// <summary>
         /// Returns the value at index m in array slice A[l..h], if the slice 
@@ -77,12 +81,12 @@ namespace BruteForceMedian
         {
             int pivotal = array[l];
             int pivotloc = l;
-            for (int a = l + 1; a < h; a++)
+            for (int j = l + 1; j <= h; j++)
             {
-                if (array[a] < pivotal)
+                if (array[j] < pivotal)
                 {
                     pivotloc += 1;
-                    Swap(array, pivotloc, a); // Swap elements around pivot
+                    Swap(array, pivotloc, j); // Swap elements around pivot
                 }
             }
             Swap(array, l, pivotloc); // Put pivot element in place.
@@ -98,10 +102,10 @@ namespace BruteForceMedian
             array[b] = temp;
         }
 
-        static void Main(string[] args)
-        {
-            int testCases = 100;
 
+        static void Testing(int testCases)
+        {
+            
             // Array for the sizes of array to test
             int[] sizeArray = new int[] { 10, 50, 100, 500, 1000, 2500, 5000, 7500, 10000, 15000 };
 
@@ -116,14 +120,8 @@ namespace BruteForceMedian
             double[,] BFtime = new double[testCount, testCases];
             double[,] Mtime = new double[testCount, testCases];
 
-            double[,] BFtimeOrdered = new double[testCount, testCases];
-            double[,] MtimeOrdered = new double[testCount, testCases];
-
             double[,] BFops = new double[testCount, testCases];
             double[,] Mops = new double[testCount, testCases];
-
-            double[,] BFopsOrdered = new double[testCount, testCases];
-            double[,] MopsOrdered = new double[testCount, testCases];
 
             // Watch class for timing algorithms
             var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -160,60 +158,21 @@ namespace BruteForceMedian
                     BFops[Array.IndexOf(sizeArray, size), a] = Counter.BFcounter;
                     BFtime[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
 
-                    // Tesing median algoritm
+                    // Testing median algoritm
                     Console.WriteLine("[status] Testing unorder median of size:\t" + size + "...");
                     Counter.Mcounter = 0;
-                    
+
                     watch.Reset();
                     watch.Start();
                     Median(values);
                     watch.Stop();
-                    
+
                     Mops[Array.IndexOf(sizeArray, size), a] = Counter.Mcounter;
                     Mtime[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
 
                 }
 
-                // Testing ordered sets
-                for (int index = 0; index < testCount; index++)
-                {
-                    int size = sizeArray[index];
-                    // Builds an array from 1 to size
-                    for (int i = 1; i <= size; i++)
-                    {
-                        testValues.Add(i);
-                    }
-                    int[] value = new int[size];
-                    value = testValues.ToArray();
-
-
-                    testValues.Clear();
-
-                    // Adds the time performance of each alogrithm to an array[Index, test case] = time in milliseconds
-                    // Tesings brute force median algorithm
-                    Console.WriteLine("[status] Testing ordered bfmed of size: \t" + size + " ...");
-                    Counter.BFcounter = 0;
-
-                    watch.Reset();
-                    watch.Start();
-                    BruteForceMedian(value);
-                    watch.Stop();
-
-                    BFopsOrdered[Array.IndexOf(sizeArray, size), a] = Counter.BFcounter;
-                    BFtimeOrdered[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
-
-                    // Tesing median algoritm
-                    Console.WriteLine("[status] Testing ordered median of size:\t" + size + " ...");
-                    Counter.Mcounter = 0;
-
-                    watch.Reset();
-                    watch.Start();
-                    Median(value);
-                    watch.Stop();
-
-                    MopsOrdered[Array.IndexOf(sizeArray, size), a] = Counter.Mcounter;
-                    MtimeOrdered[Array.IndexOf(sizeArray, size), a] = watch.Elapsed.TotalMilliseconds;
-                }
+                
             }
 
             Console.WriteLine("[status]");
@@ -222,17 +181,15 @@ namespace BruteForceMedian
             /// <summary>
             /// Iterates through the sizeArray averaging the time of each size and outputs it to the console.
             /// </summary>
-            double BFtotalTime, MtotalTime, BFtotalTimeOrdered, MtotalTimeOrdered, BFopsTotal, MopsTotal, BFopsTotalOrdered, MopsTotalOrdered;
+            double BFtotalTime, MtotalTime, BFopsTotal, MopsTotal;
             for (int a = 0; a < testCount; a++)
             {
                 BFtotalTime = 0;
                 MtotalTime = 0;
-                BFtotalTimeOrdered = 0;
-                MtotalTimeOrdered = 0;
+
                 BFopsTotal = 0;
                 MopsTotal = 0;
-                BFopsTotalOrdered = 0;
-                MopsTotalOrdered = 0;
+
                 // Total all the times dependent on test cases
                 for (int i = 0; i < testCases; i++)
                 {
@@ -240,39 +197,118 @@ namespace BruteForceMedian
                     BFtotalTime += BFtime[a, i];
                     MtotalTime += Mtime[a, i];
 
-                    // Total time (ordered)
-                    BFtotalTimeOrdered += BFtimeOrdered[a, i];
-                    MtotalTimeOrdered += MtimeOrdered[a, i];
-
                     // Total operations (unordered)
                     BFopsTotal += BFops[a, i];
                     MopsTotal += Mops[a, i];
 
-                    // Total operations (ordered)
-                    BFopsTotalOrdered += BFopsOrdered[a, i];
-                    MopsTotalOrdered += MopsOrdered[a, i];
+
                 }
                 // Averaging results
                 BFtotalTime /= testCases;
                 MtotalTime /= testCases;
 
-                BFtotalTimeOrdered /= testCases;
-                MtotalTimeOrdered /= testCases;
 
                 BFopsTotal /= testCases;
                 MopsTotal /= testCases;
 
-                BFopsTotalOrdered /= testCases;
-                MopsTotalOrdered /= testCases;
 
                 // Output results
                 Console.WriteLine("[result] Average Time for unorder set:\t" + sizeArray[a] + "\tTime(BF  :  M):\t" + BFtotalTime + " ms : " + MtotalTime + " ms");
                 Console.WriteLine("[result] Average Ops for unorder set:\t" + sizeArray[a] + "\tOps (BF  :  M):\t" + BFopsTotal + "ops : " + MopsTotal + "ops");
-                Console.WriteLine("[result] Average Time for order set:\t" + sizeArray[a] + "\tTime(BF  :  M):\t" + BFtotalTimeOrdered + " ms : " + MtotalTimeOrdered + " ms");
-                Console.WriteLine("[result] Average Ops for order set:\t" + sizeArray[a] + "\tOps (BF  :  M):\t" + BFopsTotalOrdered + "ops : " + MopsTotalOrdered + "ops");
             }
             // Close program
             Console.ReadKey();
+        }
+
+        static void FunctionalTesting()
+        {
+            // Watch class for timing algorithms
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            double BFtime, Mtime;
+            int BFvalue, Mvalue;
+            int[] OrderedEven = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] UnorderedEven = { 9, 5, 2, 3, 4, 1, 6, 7, 8, 0 };
+            int[] UnorderedOdd = { 9, 5, 2, 3, 4, 1, 6, 7, 8 };
+
+
+            Console.WriteLine("[Status] Validation testing for set: { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }");
+            //Testing Bruteforce Median
+            Counter.BFcounter = 0;
+            watch.Reset();
+            watch.Start();
+            BFvalue = BruteForceMedian(OrderedEven);
+            watch.Stop();
+            BFtime = watch.Elapsed.TotalMilliseconds;
+
+            // Testing median algorithm
+            Counter.Mcounter = 0;
+
+            watch.Reset();
+            watch.Start();
+            Mvalue = Median(OrderedEven);
+            watch.Stop();
+            Mtime = watch.Elapsed.TotalMilliseconds;
+
+            Console.WriteLine("[result] \tValue (BF  :  M):\t" + BFvalue + " / " + Mvalue);
+            Console.WriteLine("[result] \tTime  (BF  :  M):\t" + BFtime + " ms : " + Mtime + " ms");
+            Console.WriteLine("[result] \tOps   (BF  :  M):\t" + Counter.BFcounter + "ops : " + Counter.Mcounter + "ops");
+
+
+            Console.WriteLine("[Status] Validation testing for set: { 9, 5, 2, 3, 4, 1, 6, 7, 8, 0 }");
+            //Testing Bruteforce Median
+            Counter.BFcounter = 0;
+            watch.Reset();
+            watch.Start();
+            BFvalue = BruteForceMedian(UnorderedEven);
+            watch.Stop();
+            BFtime = watch.Elapsed.TotalMilliseconds;
+
+            // Testing median algorithm
+            Counter.Mcounter = 0;
+
+            watch.Reset();
+            watch.Start();
+            Mvalue = Median(UnorderedEven);
+            watch.Stop();
+            Mtime = watch.Elapsed.TotalMilliseconds;
+
+            Console.WriteLine("[result] \tValue (BF  :  M):\t" + BFvalue + " / " + Mvalue);
+            Console.WriteLine("[result] \tTime  (BF  :  M):\t" + BFtime + " ms : " + Mtime + " ms");
+            Console.WriteLine("[result] \tOps   (BF  :  M):\t" + Counter.BFcounter + "ops : " + Counter.Mcounter + "ops");
+
+
+            Console.WriteLine("[Status] Validation testing for set: { 9, 5, 2, 3, 4, 1, 6, 7, 8 }");
+            //Testing Bruteforce Median
+            Counter.BFcounter = 0;
+            watch.Reset();
+            watch.Start();
+            BFvalue = BruteForceMedian(UnorderedOdd);
+            watch.Stop();
+            BFtime = watch.Elapsed.TotalMilliseconds;
+
+            // Testing median algorithm
+            Counter.Mcounter = 0;
+
+            watch.Reset();
+            watch.Start();
+            Mvalue = Median(UnorderedOdd);
+            watch.Stop();
+            Mtime = watch.Elapsed.TotalMilliseconds;
+
+            Console.WriteLine("[result] \tValue (BF  :  M):\t" + BFvalue + " / " + Mvalue);
+            Console.WriteLine("[result] \tTime  (BF  :  M):\t" + BFtime + " ms : " + Mtime + " ms");
+            Console.WriteLine("[result] \tOps   (BF  :  M):\t" + Counter.BFcounter + "ops : " + Counter.Mcounter + "ops");
+
+
+            Console.ReadKey();
+            
+
+        }
+        static void Main(string[] args)
+        {
+            FunctionalTesting();
+            Testing(100);
         }
     }
 }
